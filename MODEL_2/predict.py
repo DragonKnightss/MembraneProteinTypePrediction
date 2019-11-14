@@ -47,7 +47,7 @@ class Capsule(Layer):
                  share_weights=True,
                  activation='squash',
                  **kwargs):
-        super(Capsule, self).__init__(**kwargs)  # Capsule继承**kwargs参数
+        super(Capsule, self).__init__(**kwargs) 
         self.num_capsule = num_capsule
         self.dim_capsule = dim_capsule
         self.routings = routings
@@ -55,7 +55,7 @@ class Capsule(Layer):
         if activation == 'squash':
             self.activation = squash
         else:
-            self.activation = activation.get(activation)  # 得到激活函数
+            self.activation = activation.get(activation)  
 
     def build(self, input_shape):
         input_dim_capsule = input_shape[-1]
@@ -74,7 +74,7 @@ class Capsule(Layer):
                        self.num_capsule * self.dim_capsule),
                 initializer='glorot_uniform',
                 trainable=True)
-        super(Capsule, self).build(input_shape)  # 必须继承Layer的build方法
+        super(Capsule, self).build(input_shape) 
 
     def call(self, inputs):
         if self.share_weights:
@@ -101,7 +101,7 @@ class Capsule(Layer):
                     o = K.sum(o, axis=1)
         return o
 
-    def compute_output_shape(self, input_shape):  # 自动推断shape
+    def compute_output_shape(self, input_shape):  
         return (None, self.num_capsule, self.dim_capsule)
 
 
@@ -116,9 +116,9 @@ def MODEL():
     x = Conv2D(32, (1, 1), activation='relu')(x)
     x = Dropout(0.5)(x)
 
-    x = Reshape((-1, 16))(x)  # (None, 100, 128) 相当于前一层胶囊(None, input_num, input_dim)
-    capsule = Capsule(num_capsule=8, dim_capsule=16, routings=3, share_weights=True)(x)  # capsule-（None,10, 16)
-    output = Lambda(lambda z: K.sqrt(K.sum(K.square(z), axis=2)))(capsule)  # 最后输出变成了10个概率值
+    x = Reshape((-1, 16))(x)  
+    capsule = Capsule(num_capsule=8, dim_capsule=16, routings=3, share_weights=True)(x)  
+    output = Lambda(lambda z: K.sqrt(K.sum(K.square(z), axis=2)))(capsule) 
     model = Model(inputs=input_image, output=output)
     return model
 
