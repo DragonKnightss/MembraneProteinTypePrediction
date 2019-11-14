@@ -108,11 +108,11 @@ def fasta2num(filename):
         X.append(result_index)
     return X
 
-X_train = fasta2num('D:\Works\Fu_Shi\github\DATASET\DATASET_1\Sequence\Train.fasta')
-X_test = fasta2num('D:\Works\Fu_Shi\github\DATASET\DATASET_1\Sequence\Test.fasta')
+X_train = fasta2num('\DATASET\DATASET_1\Sequence\Train.fasta')
+X_test = fasta2num('\DATASET\DATASET_1\Sequence\Test.fasta')
 
-y_train = np.loadtxt('D:\Works\Fu_Shi\github\DATASET\DATASET_1\Sequence/trainLabel') - 1
-y_test = np.loadtxt('D:\Works\Fu_Shi\github\DATASET\DATASET_1\Sequence/testLabel') - 1
+y_train = np.loadtxt('\DATASET\DATASET_1\Sequence/trainLabel') - 1
+y_test = np.loadtxt('\DATASET\DATASET_1\Sequence/testLabel') - 1
 
 pc = np.loadtxt('Auto_enconder_19')
 pc = pc.reshape(20,19)
