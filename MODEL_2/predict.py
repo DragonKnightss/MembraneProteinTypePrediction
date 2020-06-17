@@ -157,7 +157,6 @@ if __name__ == '__main__':
 
     model = MODEL()
     model.load_weights('weights.best_5')
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     predict = model.predict(X_val)
 
     label = np.array([np.argmax(predict[i]) for i in range(len(Y_vall))])
